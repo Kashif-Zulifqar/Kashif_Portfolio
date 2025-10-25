@@ -122,10 +122,32 @@ export default function Portfolio() {
   // };
 
   const skills = {
-    frontend: ["React.js", "JavaScript (ES6+)", "HTML5", "CSS3", "Vite"],
-    backend: ["Node.js", "Express.js", "MongoDB", "REST APIs"],
-    tools: ["Git", "GitHub", "Postman", "VS Code"],
-    ai: ["Python", "TensorFlow", "Pandas", "NumPy", "Scikit-Learn"],
+    frontend: [
+      { name: "React.js", icon: "devicon-react-original colored" },
+      { name: "JavaScript", icon: "devicon-javascript-plain colored" },
+      { name: "HTML5", icon: "devicon-html5-plain colored" },
+      { name: "CSS3", icon: "devicon-css3-plain colored" },
+      { name: "Vite", icon: "devicon-vite-original colored" },
+    ],
+    backend: [
+      { name: "Node.js", icon: "devicon-nodejs-plain colored" },
+      { name: "Express.js", icon: "devicon-express-original" },
+      { name: "MongoDB", icon: "devicon-mongodb-plain colored" },
+      { name: "REST APIs", icon: "devicon-fastapi-plain colored" },
+    ],
+    tools: [
+      { name: "Git", icon: "devicon-git-plain colored" },
+      { name: "GitHub", icon: "devicon-github-original" },
+      { name: "Postman", icon: "devicon-postman-plain colored" },
+      { name: "VS Code", icon: "devicon-vscode-plain colored" },
+    ],
+    ai: [
+      { name: "Python", icon: "devicon-python-plain colored" },
+      { name: "TensorFlow", icon: "devicon-tensorflow-original colored" },
+      { name: "Pandas", icon: "devicon-pandas-original colored" },
+      { name: "NumPy", icon: "devicon-numpy-original colored" },
+      { name: "Scikit-Learn", icon: "devicon-scikitlearn-plain colored" },
+    ],
   };
 
   return (
@@ -449,9 +471,22 @@ function SkillCard({ title, icon, skills }) {
         <div className="skill-icon">{icon}</div>
         <h3 className="skill-title">{title}</h3>
       </div>
+
       <ul className="skill-list">
         {skills.map((skill, idx) => (
-          <li key={idx}>• {skill}</li>
+          <li key={idx} className="skill-item">
+            {typeof skill === "string" ? (
+              <>• {skill}</>
+            ) : (
+              <>
+                <i
+                  className={skill.icon}
+                  style={{ marginRight: "8px", fontSize: "20px" }}
+                ></i>
+                {skill.name}
+              </>
+            )}
+          </li>
         ))}
       </ul>
     </div>
