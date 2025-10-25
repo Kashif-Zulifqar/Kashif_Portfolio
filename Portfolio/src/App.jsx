@@ -28,35 +28,44 @@ export default function Portfolio() {
   const [logoImage, setLogoImage] = useState("/logo.png");
 
   const featuredProjects = [
-    "Note-Taking-app",
-    "DisneyClone",
-    "BookBuddy",
-    "Machine-learning",
-    "Web-Engineering",
+    "WebEngineering_Semester_Project",
+    "Tuition_Web_Frontend",
+    "FoodApp_Frontend",
+    "Kashif_mern_10pshine",
+    "EAD_Final_Project",
+    "GraphApp",
   ];
-
   useEffect(() => {
     fetch(
       "https://api.github.com/users/Kashif-Zulifqar/repos?sort=updated&per_page=100"
     )
       .then((res) => res.json())
       .then((data) => {
+        // Filter to show only your featured projects
         const featured = data
-          .filter((repo) =>
-            featuredProjects.some((name) =>
-              repo.name.toLowerCase().includes(name.toLowerCase())
-            )
-          )
-          .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+          .filter((repo) => featuredProjects.includes(repo.name))
+          .sort((a, b) => {
+            // Sort by the order in featuredProjects array
+            return (
+              featuredProjects.indexOf(a.name) -
+              featuredProjects.indexOf(b.name)
+            );
+          });
+
         setRepos(featured);
         setLoading(false);
+
+        // Debug: log fetched repos
+        console.log(
+          "Featured repos found:",
+          featured.map((r) => r.name)
+        );
       })
       .catch((err) => {
         console.error("Error fetching repos:", err);
         setLoading(false);
       });
   }, []);
-
   useEffect(() => {
     const handleScroll = () => {
       const sections = [
@@ -481,25 +490,46 @@ function ProjectCard({ repo }) {
 function ManualProjects() {
   const projects = [
     {
-      name: "Note Taking App",
+      name: "Web Engineering Semester Project",
       description:
-        "Full-stack CRUD application with user authentication and REST API integration using MERN stack.",
+        "Frontend web development project showcasing modern web technologies and responsive design principles.",
+      tech: ["HTML", "CSS", "JavaScript", "Responsive"],
+      link: "https://github.com/Kashif-Zulifqar/WebEngineering_Semester_Project",
+    },
+    {
+      name: "Tuition Web Frontend",
+      description:
+        "Educational platform frontend with intuitive UI for managing tuition classes and student interactions.",
+      tech: ["React", "CSS", "Frontend"],
+      link: "https://github.com/Kashif-Zulifqar/Tuition_Web_Frontend",
+    },
+    {
+      name: "Food App Frontend",
+      description:
+        "Modern food ordering application with beautiful UI/UX and seamless user experience.",
+      tech: ["React", "CSS", "UI/UX"],
+      link: "https://github.com/Kashif-Zulifqar/FoodApp_Frontend",
+    },
+    {
+      name: "Note Taking App (MERN)",
+      description:
+        "Full-stack MERN application with user authentication, CRUD operations, and REST API integration.",
       tech: ["React", "Node.js", "MongoDB", "Express"],
-      link: "https://github.com/Kashif-Zulifqar",
+      link: "https://github.com/Kashif-Zulifqar/Kashif_mern_10pshine",
     },
     {
-      name: "DisneyClone",
+      name: "Disney Clone (MERN)",
       description:
-        "Netflix-style movie streaming UI built with React, Vite, and Express backend integrated with TMDB API.",
-      tech: ["React", "Vite", "Express", "API"],
-      link: "https://github.com/Kashif-Zulifqar",
+        "Netflix-style streaming platform with user authentication, beautiful UI, and full MERN stack implementation.",
+      tech: ["MERN", "Authentication", "UI/UX"],
+      link: "https://github.com/Kashif-Zulifqar/EAD_Final_Project",
     },
     {
-      name: "BookBuddy",
+      name: "Graph App",
       description:
-        "Book-sharing application with user authentication, MongoDB storage, and responsive React frontend.",
-      tech: ["MERN", "Authentication", "REST API"],
-      link: "https://github.com/Kashif-Zulifqar",
+        "Full-stack application for data visualization and graph management with interactive features.",
+      tech: ["MERN", "Data Viz", "Charts"],
+      link: "https://github.com/Kashif-Zulifqar/GraphApp",
     },
   ];
 
