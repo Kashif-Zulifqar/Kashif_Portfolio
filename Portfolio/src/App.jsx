@@ -15,7 +15,8 @@ import {
   Upload,
 } from "lucide-react";
 import "./App.css";
-
+import logo from "./assets/logo.jpg";
+import profile from "./assets/profile.jpg";
 // Main Portfolio Component
 export default function Portfolio() {
   const [darkMode, setDarkMode] = useState(true);
@@ -96,20 +97,20 @@ export default function Portfolio() {
     }
   };
 
-  const handleImageUpload = (e, type) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        if (type === "profile") {
-          setProfileImage(reader.result);
-        } else if (type === "logo") {
-          setLogoImage(reader.result);
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  // const handleImageUpload = (e, type) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       if (type === "profile") {
+  //         setProfileImage(reader.result);
+  //       } else if (type === "logo") {
+  //         setLogoImage(reader.result);
+  //       }
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
   const skills = {
     frontend: ["React.js", "JavaScript (ES6+)", "HTML5", "CSS3", "Vite"],
@@ -125,7 +126,7 @@ export default function Portfolio() {
         <div className="nav-container">
           <div className="nav-content">
             <div className="nav-brand">
-              <img src={logoImage} alt="Logo" className="nav-logo" />
+              <img src={logo} alt="Logo" className="nav-logo" />
               <span className="nav-title">Kashif Zulifqar</span>
             </div>
 
@@ -191,7 +192,7 @@ export default function Portfolio() {
       </nav>
 
       {/* Image Upload Section */}
-      <div className="upload-panel">
+      {/* <div className="upload-panel">
         <p className="upload-title">Upload Images</p>
         <div className="upload-buttons">
           <label className="upload-btn">
@@ -213,7 +214,7 @@ export default function Portfolio() {
             />
           </label>
         </div>
-      </div>
+      </div> */}
 
       {/* Hero Section */}
       <section id="home" className="hero-section">
